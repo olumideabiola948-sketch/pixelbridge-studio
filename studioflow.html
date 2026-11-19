@@ -1,0 +1,629 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>StudioFlow | Project Workspace</title>
+  <style>
+ 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+:root {
+  --navy: #111827;
+  --navy-light: #1e293b;
+  --blue: #5798ff;
+  --purple: #8b5cf6;
+  --background: #f4f6fb;
+  --white: #ffffff;
+  --muted: #8993a7;
+  --border: #e9edf4;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background: var(--background);
+  color: var(--navy);
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  transition: 0.25s ease;
+}
+
+.app {
+  display: flex;
+  min-height: 100vh;
+}
+
+/* SIDEBAR */
+
+.sidebar {
+  width: 250px;
+  background: linear-gradient(180deg, #111827, #19243a);
+  color: white;
+  padding: 32px 20px;
+  flex-shrink: 0;
+}
+
+.brand {
+  font-size: 24px;
+  font-weight: 800;
+  letter-spacing: -1px;
+  margin-bottom: 55px;
+}
+
+.brand span {
+  color: #65b8ff;
+}
+
+.nav-label {
+  color: #8190a8;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 2px;
+  margin: 28px 12px 13px;
+}
+
+.nav-link {
+  display: block;
+  color: #b9c5d8;
+  padding: 13px 14px;
+  margin-bottom: 7px;
+  border-radius: 9px;
+  text-decoration: none;
+  font-size: 13px;
+  transition: 0.25s ease;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  background: linear-gradient(90deg, #304b70, #273751);
+  color: white;
+  transform: translateX(3px);
+}
+
+/* MAIN AREA */
+
+.main {
+  flex: 1;
+  min-width: 0;
+}
+
+.topbar {
+  background: white;
+  padding: 19px 38px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid var(--border);
+}
+
+.topbar strong {
+  font-size: 14px;
+}
+
+.topbar small {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.avatar {
+  width: 42px;
+  height: 42px;
+  display: grid;
+  place-items: center;
+  border-radius: 13px;
+  background: linear-gradient(135deg, #5798ff, #8b5cf6);
+  color: white;
+  font-weight: 800;
+  box-shadow: 0 5px 15px #5798ff44;
+}
+
+.content {
+  padding: 38px;
+  max-width: 1350px;
+  margin: auto;
+}
+
+/* WELCOME */
+
+.welcome {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  margin-bottom: 32px;
+  animation: appear 0.6s ease;
+}
+
+h1 {
+  font-size: clamp(25px, 4vw, 34px);
+  font-weight: 800;
+  letter-spacing: -1.5px;
+  margin-bottom: 9px;
+}
+
+.subtitle {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+/* BUTTONS */
+
+.primary {
+  background: linear-gradient(110deg, #347df5, #7659e8);
+  color: white;
+  padding: 13px 20px;
+  border-radius: 9px;
+  font-size: 12px;
+  font-weight: 700;
+  border: none;
+  box-shadow: 0 6px 15px #5798ff35;
+}
+
+.primary:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 9px 22px #5798ff55;
+}
+
+/* STATISTICS */
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  margin-bottom: 27px;
+}
+
+.stat {
+  background: white;
+  padding: 24px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  box-shadow: 0 5px 20px #182b4610;
+  transition: 0.3s ease;
+  animation: appear 0.6s ease;
+}
+
+.stat:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px #182b4618;
+}
+
+.stat p {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.stat h2 {
+  font-size: 32px;
+  margin-top: 13px;
+  letter-spacing: -1px;
+}
+
+/* PANELS */
+
+.panel {
+  background: white;
+  padding: 25px;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  margin-bottom: 24px;
+  box-shadow: 0 5px 20px #182b4609;
+}
+
+.panel-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 23px;
+}
+
+.panel-heading h2 {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+/* PROJECTS */
+
+.project-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 17px;
+}
+
+.project {
+  border: 1px solid var(--border);
+  padding: 22px;
+  border-radius: 12px;
+  transition: 0.3s ease;
+  background: linear-gradient(145deg, #fff, #fafbff);
+}
+
+.project:hover {
+  transform: translateY(-4px);
+  border-color: #b9d5ff;
+  box-shadow: 0 10px 25px #182b4610;
+}
+
+.project h3 {
+  font-size: 15px;
+  margin-bottom: 9px;
+}
+
+.project p {
+  color: var(--muted);
+  font-size: 11px;
+  margin-bottom: 20px;
+}
+
+.project small {
+  color: #66748a;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.progress {
+  height: 7px;
+  background: #edf1f8;
+  border-radius: 20px;
+  overflow: hidden;
+  margin: 12px 0;
+}
+
+.progress span {
+  display: block;
+  height: 100%;
+  border-radius: 20px;
+  background: linear-gradient(90deg, #3985f7, #9562ed);
+  transition: width 0.5s ease;
+}
+
+/* TASK MANAGER */
+
+.task {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 17px 4px;
+  border-bottom: 1px solid var(--border);
+  font-size: 12px;
+  transition: 0.2s ease;
+}
+
+.task:hover {
+  background: #fafbff;
+}
+
+.task:last-child {
+  border-bottom: none;
+}
+
+.task label {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+.task input {
+  width: 16px;
+  height: 16px;
+  accent-color: #5798ff;
+  cursor: pointer;
+}
+
+.task.completed span {
+  text-decoration: line-through;
+  color: #a1aaba;
+}
+
+.task button {
+  background: #edf4ff;
+  color: #397ee4;
+  padding: 7px 11px;
+  border-radius: 6px;
+  font-size: 10px;
+}
+
+.task button:hover {
+  background: #dceaff;
+}
+
+/* ANIMATIONS */
+
+@keyframes appear {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 850px) {
+  .sidebar {
+    width: 200px;
+  }
+
+  .content {
+    padding: 25px;
+  }
+}
+
+@media (max-width: 650px) {
+  .sidebar {
+    width: 68px;
+    padding: 25px 8px;
+  }
+
+  .brand {
+    font-size: 12px;
+    margin-bottom: 35px;
+  }
+
+  .nav-label {
+    display: none;
+  }
+
+  .nav-link {
+    font-size: 0;
+    text-align: center;
+    padding: 15px 3px;
+  }
+
+  .nav-link::first-letter {
+    font-size: 17px;
+  }
+
+  .stats,
+  .project-list {
+    grid-template-columns: 1fr;
+  }
+
+  .content {
+    padding: 20px 14px;
+  }
+
+  .topbar {
+    padding: 16px;
+  }
+
+  .welcome {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .panel {
+    padding: 18px;
+  }
+}
+
+  </style>
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">Studio<span>Flow.</span></div>
+
+      <p class="nav-label">WORKSPACE</p>
+      <a href="#dashboard" class="nav-link active">▦ Dashboard</a>
+      <a href="#projects" class="nav-link">▣ Projects</a>
+      <a href="#tasks" class="nav-link">✓ Tasks</a>
+
+      <p class="nav-label">STUDIO</p>
+      <a href="index.html" class="nav-link">⌂ PixelBridge</a>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <strong>Workspace</strong><br>
+          <small>StudioFlow / Overview</small>
+        </div>
+        <div class="avatar">S</div>
+      </header>
+
+      <div class="content" id="dashboard">
+        <section class="welcome">
+          <div>
+            <h1>Good to see you!</h1>
+            <p class="subtitle">Here's what's happening in your studio today.</p>
+          </div>
+          <button class="primary" id="add-project">+ New Project</button>
+        </section>
+
+        <section class="stats">
+          <div class="stat">
+            <p>Total Projects</p>
+            <h2 id="project-count">2</h2>
+          </div>
+          <div class="stat">
+            <p>Active Tasks</p>
+            <h2 id="task-count">3</h2>
+          </div>
+          <div class="stat">
+            <p>Completed Tasks</p>
+            <h2 id="completed-count">1</h2>
+          </div>
+        </section>
+
+        <section class="panel" id="projects">
+          <div class="panel-heading">
+            <h2>Your Projects</h2>
+          </div>
+          <div class="project-list" id="project-list">
+            <article class="project">
+              <h3>Website Redesign</h3>
+              <p>Website development · In progress</p>
+              <div class="progress"><span style="width:70%"></span></div>
+              <small>70% complete</small>
+            </article>
+            <article class="project">
+              <h3>Brand Identity</h3>
+              <p>Creative design · In progress</p>
+              <div class="progress"><span style="width:35%"></span></div>
+              <small>35% complete</small>
+            </article>
+          </div>
+        </section>
+
+        <section class="panel" id="tasks">
+          <div class="panel-heading">
+            <h2>Task Manager</h2>
+            <button class="primary" id="add-task">+ Add Task</button>
+          </div>
+          <div id="task-list">
+            <div class="task">
+              <label><input type="checkbox"><span>Plan website layout</span></label>
+            </div>
+            <div class="task">
+              <label><input type="checkbox"><span>Create homepage design</span></label>
+            </div>
+            <div class="task">
+              <label><input type="checkbox" checked><span>Set up project workspace</span></label>
+            </div>
+            <div class="task">
+              <label><input type="checkbox"><span>Review project content</span></label>
+            </div>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <script>
+    
+const taskList = document.getElementById('task-list');
+const projectList = document.getElementById('project-list');
+
+// Save projects and tasks
+function saveDashboard() {
+  const dashboardData = {
+    tasks: taskList.innerHTML,
+    projects: projectList.innerHTML
+  };
+
+  localStorage.setItem(
+    'studioflow-dashboard',
+    JSON.stringify(dashboardData)
+  );
+}
+
+// Load previously saved data
+function loadDashboard() {
+  try {
+    const savedDashboard = JSON.parse(
+      localStorage.getItem('studioflow-dashboard')
+    );
+
+    if (savedDashboard) {
+      if (typeof savedDashboard.tasks === 'string') {
+        taskList.innerHTML = savedDashboard.tasks;
+      }
+
+      if (typeof savedDashboard.projects === 'string') {
+        projectList.innerHTML = savedDashboard.projects;
+      }
+    }
+  } catch (error) {
+    console.log('Could not restore dashboard data.');
+  }
+}
+
+// Update dashboard statistics
+function updateStats() {
+  const tasks = [...taskList.querySelectorAll('.task input')];
+  const completed = tasks.filter(task => task.checked).length;
+
+  document.getElementById('task-count').textContent =
+    tasks.length - completed;
+
+  document.getElementById('completed-count').textContent =
+    completed;
+
+  document.getElementById('project-count').textContent =
+    projectList.children.length;
+
+  saveDashboard();
+}
+
+// Load saved data when the page opens
+loadDashboard();
+updateStats();
+
+// Handle task completion
+taskList.addEventListener('change', event => {
+  if (event.target.type === 'checkbox') {
+    event.target.closest('.task').classList.toggle(
+      'completed',
+      event.target.checked
+    );
+
+    updateStats();
+  }
+});
+
+// Add new task
+document.getElementById('add-task').addEventListener('click', () => {
+  const name = prompt('What task would you like to add?');
+
+  if (!name || !name.trim()) return;
+
+  const task = document.createElement('div');
+  task.className = 'task';
+
+  task.innerHTML = `
+    <label>
+      <input type="checkbox">
+      <span></span>
+    </label>
+  `;
+
+  task.querySelector('span').textContent = name.trim();
+
+  taskList.appendChild(task);
+  updateStats();
+});
+
+// Add new project
+document.getElementById('add-project').addEventListener('click', () => {
+  const name = prompt('Enter your new project name:');
+
+  if (!name || !name.trim()) return;
+
+  const project = document.createElement('article');
+  project.className = 'project';
+
+  project.innerHTML = `
+    <h3></h3>
+    <p>New project · Just created</p>
+    <div class="progress">
+      <span style="width:0%"></span>
+    </div>
+    <small>0% complete</small>
+  `;
+
+  project.querySelector('h3').textContent = name.trim();
+
+  projectList.appendChild(project);
+  updateStats();
+});
+
+  </script>
+</body>
+</html>
